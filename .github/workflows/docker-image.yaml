@@ -1,0 +1,37 @@
+name: Build Docker Image
+
+# Le workflow se déclenche à chaque commit dans la branche "main"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Cloner le code du dépôt
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Installer Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      # 3. Construire l'image Docker
+      - name: Build Docker image
+        run: |
+          docker build -t my-spring-app .
+
+      # 4. Sauvegarder l'image Docker en fichier tar
+      - name: Save Docker image as a file
+        run: |
+          docker save -o my-spring-app.tar my-spring-app
+
+      # 5. Téléverser l'image Docker sauvegardée dans les artefacts GitHub pour la télécharger ensuite
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-spring-app-image
+          path: my-spring-app.tar
