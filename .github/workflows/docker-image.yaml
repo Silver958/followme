@@ -22,7 +22,7 @@ jobs:
       # 3. Construire l'image Docker
       - name: Build Docker image
         run: |
-          docker build -t my-spring-app .
+          docker build -t my-spring-app -f docker/Dockerfile .
 
       # 4. Sauvegarder l'image Docker en fichier tar
       - name: Save Docker image as a file
