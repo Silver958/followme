@@ -1,5 +1,5 @@
 # Étape 1: Utiliser une image Maven basée sur Alpine pour builder l'application
-FROM maven:maven:3-amazoncorretto-17-al2023 AS build
+FROM maven:3-amazoncorretto-17-al2023 AS build
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
